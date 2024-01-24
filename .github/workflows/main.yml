@@ -19,11 +19,8 @@ jobs:
         run: ls -al
       - name: API Key 출력
         run: echo ${{secrets.CODA_API_KEY}}
-  python-execute:
-    runs-on: ubuntu-latest
-    steps:
-        - name: python3 coda_api.py
-          run: python3 coda_api.py
-        - name: python3 coda_api_py "hi"
-          run: python3 coda_api.py "hi"
+      - name: python3 coda_api.py
+        run: python3 coda_api.py
+      - name: python3 coda_api_py "hi"
+        run: python3 coda_api.py "hi"        
   
