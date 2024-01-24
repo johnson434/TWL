@@ -5,7 +5,7 @@ on:
   repository_dispatch:
     types: [coda-event]  
 jobs:
-  checkout:
+  get-doc-from-api:
     runs-on: ubuntu-latest
     steps:
       - name: 현재 디렉터리 위치 출력
@@ -17,3 +17,13 @@ jobs:
         uses: actions/checkout@v2
       - name: action 사용 후에 내용 출력
         run: ls -al
+      - name: API Key 출력
+        run: echo ${{secrets.CODA_API_KEY}}
+  python-execute:
+    runs-on: ubuntu-latest
+    steps:
+        - name: python3 coda_api.py
+          run: python3 coda_api.py
+        - name: python3 coda_api_py "hi"
+          run: python3 coda_api.py "hi"
+  
