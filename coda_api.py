@@ -8,7 +8,7 @@ def get_list_pages(coda_api_key, doc_id):
     return res
 
 args = sys.argv
-coda_api_key = args[0]
+coda_api_key = args[1]
 doc_id = "OBsatQ1Yn9"
 
 print("args : ", args)
