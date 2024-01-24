@@ -12,6 +12,8 @@ jobs:
         run: pwd
       - name: 현재 디렉터리 내용 출력
         run: ls -al
+      - name: 부모 디렉터리 내용 출력
+        run: ls ../ -al
       - name: Check out repository code
         # {소유자}/{저장소명}@{참조자(버전)}
         uses: actions/checkout@v2
