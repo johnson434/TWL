@@ -1,9 +1,9 @@
 import sys
 import requests
-import coda_data
 import queue
 import time
 from enum import Enum
+from main.data import coda_data
 
 class FileFormat(Enum):
     Markdown = 1
@@ -13,7 +13,7 @@ BASE_URL = "https://coda.io/apis/v1/docs"
 doc_id = "OBsatQ1Yn9"
 
 # todo : 제거해야됨
-coda_api_key = "43004595-3a62-4a75-a345-59a6ffde40a4"
+# coda_api_key = open("../../token.txt", mode='r').readline()
 
 # https://coda.io/developers/apis/v1#tag/Pages/operation/listPages
 def listPages(coda_api_key, doc_id) -> coda_data.ListPagesResponse:
