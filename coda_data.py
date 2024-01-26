@@ -92,6 +92,23 @@ class ListPagesResponse:
         _items = [Item.from_dict(y) for y in obj.get("items")]
         _href = str(obj.get("href"))
         return ListPagesResponse(items=_items, href=_href)
+    
+@dataclass
+class ExportPageResponse:
+    request_id: str
+    status: str
+    href: str
+
+    @staticmethod
+    def from_dict(obj) -> 'ExportPageResponse':
+        _request_id = [obj.get("id")]
+        _status = [obj.get("status")]
+        _href = [obj.get("href")]
+        return ExportPageResponse(
+            request_id=_request_id,
+            status=_status,
+            href=_href
+        )
 
 @dataclass
 class Author:
