@@ -42,4 +42,4 @@ jobs:
       - name: action 사용 후에 내용 출력
         run: ls -al
       - name: End to End test
-        run: cd ./SyncCodaAndGithub/python/test/ & python3 -m unittest -k TestCodaAPIEndToEnd coda_test.py
+        run: cd ./SyncCodaAndGithub/python/test/ & ls -al & python3 -m unittest -k TestCodaAPIEndToEnd coda_test.py
