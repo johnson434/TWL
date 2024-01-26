@@ -19,6 +19,6 @@ jobs:
         run: ls -al
       - name: API Key 출력
         run: echo ${{secrets.CODA_API_KEY}}
-      - name: python3 coda_api_py ${{secrets.CODA_API_KEY}}
-        run: python3 coda_api.py ${{secrets.CODA_API_KEY}}
+      - name: python3 ./SyncCodaAndGithub/python/main/coda_api.py ${{secrets.CODA_API_KEY}}
+        run: python3 ./SyncCodaAndGithub/python/main/coda_api.py ${{secrets.CODA_API_KEY}}
   
