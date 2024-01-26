@@ -7,6 +7,9 @@ on:
 jobs:
   request-export-doc:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: /home/runner/work/TWL/TWL/SyncCodaAndGithub/python
+
     steps:
       - name: 현재 디렉터리 위치 출력
         run: pwd
@@ -19,9 +22,7 @@ jobs:
         run: ls -al
       - name: API Key 출력
         run: echo ${{secrets.CODA_API_KEY}}
-      - name: python 경로 설정
-        run: export PYTHONPATH=/home/runner/work/TWL/TWL/SyncCodaAndGithub/python
-      - name: PYTHON 환경 변수 설정 확인
+      - name: PYTHON 경로 확인
         run: echo $PYTHONPATH
       - name: python3 ./SyncCodaAndGithub/python/main/coda_api.py ${{secrets.CODA_API_KEY}}
         run: python3 ./SyncCodaAndGithub/python/main/coda_api.py ${{secrets.CODA_API_KEY}}
