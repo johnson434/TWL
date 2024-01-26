@@ -101,13 +101,33 @@ class ExportPageResponse:
 
     @staticmethod
     def from_dict(obj) -> 'ExportPageResponse':
-        _request_id = [obj.get("id")]
-        _status = [obj.get("status")]
-        _href = [obj.get("href")]
+        _request_id = obj.get("id")
+        _status = obj.get("status")
+        _href = obj.get("href")
         return ExportPageResponse(
             request_id=_request_id,
             status=_status,
             href=_href
+        )
+
+@dataclass
+class GetExportStatusResponse:
+    id: str
+    status: str
+    downloadLink: str
+    error: str
+
+    @staticmethod
+    def from_dic(obj) -> 'GetExportStatusResponse':
+        _id = obj.get('id')
+        _status = obj.get('status')
+        _downloadLink = obj.get('downloadLink')
+        _error = obj.get('error')
+        return GetExportStatusResponse(
+            id = _id,
+            status= _status,
+            downloadLink=_downloadLink,
+            error=_error
         )
 
 @dataclass
