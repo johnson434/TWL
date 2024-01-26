@@ -26,4 +26,20 @@ jobs:
         run: echo $PYTHONPATH
       - name: python3 ./SyncCodaAndGithub/python/main/coda_api.py ${{secrets.CODA_API_KEY}}
         run: python3 ./SyncCodaAndGithub/python/main/coda_api.py ${{secrets.CODA_API_KEY}}
-  
+
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: /home/runner/work/TWL/TWL/SyncCodaAndGithub/python
+    steps:
+      - name: 현재 디렉터리 위치 출력
+        run: pwd
+      - name: 현재 디렉터리 내용 출력
+        run: ls -al
+      - name: Check out repository code
+        # {소유자}/{저장소명}@{참조자(버전)}
+        uses: actions/checkout@v2
+      - name: action 사용 후에 내용 출력
+        run: ls -al
+      - name: End to End test
+        run: python3 -m ./SyncCodaAndGithub/python/test/unittest -k TestCodaAPIEndToEnd ./SyncCodaAndGithub/python/test/coda_test.py
