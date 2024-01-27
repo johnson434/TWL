@@ -1,6 +1,7 @@
 import requests
 import main.data.coda_data as coda_data
 import logging
+import os
 from main.file.file_format import FileFormat
 
 BASE_URL = "https://coda.io/apis/v1/docs"
@@ -46,7 +47,7 @@ def export_page(coda_api_key, doc_id, page_id) -> coda_data.ExportPageResponse:
     
     return coda_data.ExportPageResponse.from_dict(responseJson)
 
-def get_downloadLink(coda_api_key, doc_id, page_id, request_id) -> bool:
+def requestContentExportStatus(coda_api_key, doc_id, page_id, request_id) -> coda_data.ContentExportStatusResponse:
     logger.debug('called')
 
     headers = {'Authorization': 'Bearer {}'.format(coda_api_key)}
@@ -62,20 +63,45 @@ def get_downloadLink(coda_api_key, doc_id, page_id, request_id) -> bool:
         logger.error(error)
         return None
     
-    return responseJson.get('downloadLink')
+    return coda_data.ContentExportStatusResponse.from_dict(responseJson)
 
 def downloadLink(link, file_name, file_format: FileFormat):
     logger.debug('called')
 
     res = requests.get(link)
-    fullFileName = "./" + file_name
+
+    try:
+        os.makedirs("../../doc")
+    except FileExistsError:
+        logger.debug('이미 해당 디렉터리가 존재합니다.')
+    
+    fullFileName = f'../../doc/{file_name}'
     if file_format == FileFormat.Markdown:
         fullFileName += ".md"
     elif file_format == FileFormat.HTML:
         fullFileName += ".html"
     logger.info(f'fileName : {fullFileName}')
 
-    SAMPLE_FILE = open(fullFileName, 'wb')
-    SAMPLE_FILE.writelines(res)
+    file = open(fullFileName, 'wb')
+    if not file.writable():
+        logger.warn(f'file is not writable')
+    file.writelines(res)
 
+def getPage(coda_api_key, doc_id, pageIdOrName) -> coda_data.Page:
+    logger.debug('called')
+
+    headers = {'Authorization': 'Bearer {}'.format(coda_api_key)}
+    uri = f'{BASE_URL}/{doc_id}/pages/{pageIdOrName}'
+    logger.info(f'headers : {headers}\nuri : {uri}')
+
+    res = requests.get(uri, headers=headers)
+    responseJson = res.json()
+    logger.info(f'responseJson : {responseJson}')
+    
+    if res.status_code != 200 : 
+        error = coda_data.Error.from_dict(responseJson)
+        logger.error(error)
+        return None
+    
+    return coda_data.Page.from_dict(responseJson)
 
