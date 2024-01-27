@@ -129,6 +129,30 @@ class GetExportStatusResponse:
             downloadLink=_downloadLink,
             error=_error
         )
+    
+@dataclass
+class ContentExportStatusResponse:
+    id: str
+    status: str
+    href: str
+    downloadLink: str
+    error: str
+
+    @staticmethod
+    def from_dict(obj) -> 'ContentExportStatusResponse':
+        _id = str(obj.get('id'))
+        _status = str(obj.get('status'))
+        _href = str(obj.get('href'))
+        _downloadLink = str(obj.get('downloadLink'))
+        _error = str(obj.get('error'))
+        return ContentExportStatusResponse(
+            id=_id,
+            status=_status,
+            href=_href,
+            downloadLink=_downloadLink,
+            error=_error
+        )
+
 
 @dataclass
 class Author:
