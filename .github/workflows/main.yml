@@ -1,15 +1,20 @@
 name: GitHub Actions Demo
+
 on: 
-  workflow_dispatch:
   push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   repository_dispatch:
     types: [coda-event]  
 jobs:
   request-export-doc:
+    if: github.event_name == 'repository_dispatch'
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: /home/runner/work/TWL/TWL/SyncCodaAndGithub/python
-
     steps:
       - name: 현재 디렉터리 위치 출력
         run: pwd
@@ -29,6 +34,7 @@ jobs:
         run: python3 entry_point.py ${{secrets.CODA_API_KEY}}
 
   end-to-end-test:
+    if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: /home/runner/work/TWL/TWL/SyncCodaAndGithub/python
