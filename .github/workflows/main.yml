@@ -32,6 +32,10 @@ jobs:
       - name: python3 SyncCodaAndGithub/python/main/entry_point.py ${{secrets.CODA_API_KEY}}
         working-directory: ./SyncCodaAndGithub/python/main
         run: python3 entry_point.py ${{secrets.CODA_API_KEY}}
+      - name: 저장한 파일 이동
+        run: mv ../../doc/ ../../../
+      - name: 현재 경로 출력
+        run: ls -al
 
   end-to-end-test:
     if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.event.pull_request.base.ref == 'main'

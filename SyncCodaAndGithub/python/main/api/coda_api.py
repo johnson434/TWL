@@ -1,6 +1,7 @@
 import requests
 import main.data.coda_data as coda_data
 import logging
+import os
 from main.file.file_format import FileFormat
 
 BASE_URL = "https://coda.io/apis/v1/docs"
@@ -68,16 +69,23 @@ def downloadLink(link, file_name, file_format: FileFormat):
     logger.debug('called')
 
     res = requests.get(link)
-    fullFileName = f'./{file_name}'
+
+    try:
+        os.makedirs("../../doc")
+    except FileExistsError:
+        logger.debug('이미 해당 디렉터리가 존재합니다.')
+    
+    fullFileName = f'../../doc/{file_name}'
     if file_format == FileFormat.Markdown:
         fullFileName += ".md"
     elif file_format == FileFormat.HTML:
         fullFileName += ".html"
     logger.info(f'fileName : {fullFileName}')
 
-    SAMPLE_FILE = open(fullFileName, 'wb')
-
-    SAMPLE_FILE.writelines(res)
+    file = open(fullFileName, 'wb')
+    if not file.writable():
+        logger.warn(f'file is not writable')
+    file.writelines(res)
 
 def getPage(coda_api_key, doc_id, pageIdOrName) -> coda_data.Page:
     logger.debug('called')

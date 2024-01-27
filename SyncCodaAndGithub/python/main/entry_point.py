@@ -39,13 +39,15 @@ def get_all_pages(visited_doc_set: set, id_name_dict: dict, coda_api_key, doc_id
     
 
 # todo : 제거해야됨
-# coda_api_key = open("../../../token.txt", mode='r').readline()
-# doc_id = "OBsatQ1Yn9"
 def main(): 
     logger.debug("start")
+    coda_api_key = ""
+    doc_id = "OBsatQ1Yn9"
     # 토큰 및 쿼리 파람 설정
-    args = sys.argv
-    coda_api_key = args[1]
+    if len(sys.argv) < 2:
+        coda_api_key = open("../../../token.txt", mode='r').readline()
+    else:
+        coda_api_key = sys.argv[1]
 
     # 모든 page id 조회
     idNameDict = get_all_pages(visited_doc_set=set(), id_name_dict=dict(), coda_api_key=coda_api_key,doc_id=doc_id)
