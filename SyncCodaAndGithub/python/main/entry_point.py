@@ -4,13 +4,13 @@ import time
 import queue
 
 # todo : 제거해야됨
-coda_api_key = open("../../token.txt", mode='r').readline()
+# coda_api_key = open("../../token.txt", mode='r').readline()
 doc_id = "OBsatQ1Yn9"
 
 def main():
     # 토큰 및 쿼리 파람 설정
-    # args = sys.argv
-    # coda_api_key = args[1]
+    args = sys.argv
+    coda_api_key = args[1]
     
     # 가능한 페이지 출력
     print("=====================listPages=====================")
