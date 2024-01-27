@@ -43,7 +43,8 @@ jobs:
         run: |
           git config --global user.name 'jonathan'
           git config --global user.email 'ghkddlsrb96@gmail.com'
-          git commit -am "Automated report"
+          git add ./doc
+          git commit -m "문서 동기화"
           git push
 
   end-to-end-test:
