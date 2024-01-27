@@ -36,6 +36,14 @@ jobs:
         run: mv ../../doc/ ../../../
       - name: 현재 경로 출력
         run: ls -al
+      - name: 현재 branch 출력
+        run: git branch
+      - name: 수정 문서 레포지토리에 업데이트
+        run: |
+          git config --global user.name 'jonathan'
+          git config --global user.email 'ghkddlsrb96@gmail.com'
+          git commit -am "Automated report"
+          git push
 
   end-to-end-test:
     if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.event.pull_request.base.ref == 'main'
