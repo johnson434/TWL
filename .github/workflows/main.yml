@@ -28,7 +28,7 @@ jobs:
         working-directory: ./SyncCodaAndGithub/python/main
         run: python3 entry_point.py ${{secrets.CODA_API_KEY}}
 
-  test:
+  end-to-end-test:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: /home/runner/work/TWL/TWL/SyncCodaAndGithub/python
@@ -44,4 +44,4 @@ jobs:
         run: ls -al
       - name: End to End test
         working-directory: ./SyncCodaAndGithub/python/test
-        run: python3 -m unittest -k TestCodaAPIEndToEnd test_coda_api.py
+        run: python3 test_coda_api.py ${{secrets.CODA_API_KEY}}
