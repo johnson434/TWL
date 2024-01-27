@@ -13,7 +13,6 @@ def listPages(coda_api_key, doc_id) -> coda_data.ListPagesResponse:
     
     if res.status_code != 200 : 
         error = coda_data.Error.from_dict(responseJson)
-        print(f'statusCode : {error.statusCode}\nstatusMessage : {error.statusMessage}\nmessage : {error.message}')
         return None
     
     return coda_data.ListPagesResponse.from_dict(responseJson)
