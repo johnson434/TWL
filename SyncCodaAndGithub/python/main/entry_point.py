@@ -41,6 +41,4 @@ def main():
             continue
         coda_api.downloadLink(link, 'sample_file', coda_api.FileFormat.Markdown)
 
-
-
 main()

@@ -25,7 +25,8 @@ jobs:
       - name: PYTHON 경로 확인
         run: echo $PYTHONPATH
       - name: python3 SyncCodaAndGithub/python/main/entry_point.py ${{secrets.CODA_API_KEY}}
-        run: python3 SyncCodaAndGithub/python/main/entry_point.py ${{secrets.CODA_API_KEY}}
+        working-directory: ./SyncCodaAndGithub/python/main
+        run: python3 entry_point.py ${{secrets.CODA_API_KEY}}
 
   test:
     runs-on: ubuntu-latest
@@ -42,4 +43,5 @@ jobs:
       - name: action 사용 후에 내용 출력
         run: ls -al
       - name: End to End test
-        run: cd ./SyncCodaAndGithub/python/test/ & ls -al & python3 -m unittest -k TestCodaAPIEndToEnd coda_test.py
+        working-directory: ./SyncCodaAndGithub/python/test
+        run: python3 -m unittest -k TestCodaAPIEndToEnd test_coda_api.py

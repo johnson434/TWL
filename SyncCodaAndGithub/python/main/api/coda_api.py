@@ -1,6 +1,6 @@
 import requests
-import data.coda_data as coda_data
-from file.file_format import FileFormat
+import main.data.coda_data as coda_data
+from main.file.file_format import FileFormat
 
 BASE_URL = "https://coda.io/apis/v1/docs"
 

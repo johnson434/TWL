@@ -1,8 +1,11 @@
 import sys
 import unittest
-import main.coda_api as coda_api
-import main.data.coda_data as coda_data
-import os
+
+# import main.api.coda_api
+# import main.data.coda_data
+from main.api import coda_api
+from main.data import coda_data
+
 
 class TestCodaAPIEndToEnd(unittest.TestCase):
     def setUp(self):
