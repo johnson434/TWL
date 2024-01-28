@@ -34,7 +34,7 @@ jobs:
         run: python3 entry_point.py ${{secrets.CODA_API_KEY}}
       - name: 현재 디렉터리 위치 및 내용물 출력
         run: |
-          mv -f ./SyncCodaAndGithub/doc ./ 
+          rsync -a ./SyncCodaAndGithub/doc ./
       - name: 현재 경로 출력
         run: ls -al
       - name: 현재 branch 출력
