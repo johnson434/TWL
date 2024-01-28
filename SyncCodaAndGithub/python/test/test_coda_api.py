@@ -17,7 +17,7 @@ class TestCodaAPIEndToEnd(unittest.TestCase):
         coda_api_key = self.api_key
         doc_id = self.doc_id
         response = coda_api.listPages(coda_api_key=coda_api_key, doc_id=doc_id)
-        assert type(response) is coda_data.ListPagesResponse
+        raise ValueError("그냥 실패")
 
     def test_list_pages_with_wrong_app_key(self):
         response = coda_api.listPages(coda_api_key="wrong_app_key", doc_id='OBsatQ1Yn9')
